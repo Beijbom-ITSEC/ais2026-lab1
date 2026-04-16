@@ -17,6 +17,14 @@ Verifiering av agentens anslutning till manager och att loggar kommer in.
 
 Steg 5:
 Utforskade vilka standardregler som fanns med, hur dom utlöses och vilken severity de har.
+0015-ossec_rules innehåller regler som mest hanterar Wazuh agenten. Ifall en agent startar, när den startar, ifall den blir bortagen. Många av dom är level 3 då dom mest finns för information.
+0900-firewall_rules innehöll inte mycket och det var eftersom brandväggar skapar och skickar sina egna loggar. Det finns dock två regler i som handalr om droped event. I fall en brandvägg droppar packet från samma källa 18 gånger inom 45 sekunder så skapas ett level 10 larm.
+0475-suricata_rules.xml, här fanns det inte mycket alls men antar att det är för att lägga en grund så man kan skapa egna suricata regler. Innehållet i den här filen sätter mest ID på olika event som t.ex DNs event eller HTTP event.
+0250-apache_rules.xml har regler som varnar när vissa filer eller mappar öppnas gällande apache. Even vid en vanlig sårbarhet i Host header som gör att man kan skicka kod till backend via frontend. Det kan vara en form av SQL injection.
+0400-openvpn_rules.xml skapar larm gällande openvpn anslutningar. Den skapar events vid anslutningar och ger larm vid TLS auth error.
+
+
+
 
 
 Del 2: Regelbasserad detektion
