@@ -41,4 +41,28 @@ Steg 7:
 I agentens ossec.conf har jag lagt till en regel i syscheck som kollar ifall /etc/passwd, /etc/crontab eller ssh config så blir det larm och loggar.
 
 Steg 8:
+Lag till en regel i ossec.conf som sätter en timeout på IP-addresser vid larm.
 
+Steg 9:
+Skapat en dashboard med fyra olika visualizations som visar händelser per timme, fördelning av händelser per regelgrupp, top 10 ip addresser med högst antal larm och en heatmap med händelser per timme och i vilken regelkategori händelsen var i.
+SCREENSHOT LÄNK HÄR
+
+Steg 10:
+Jag simulerade en SSH brute force med hydra attack, gjorde en portscan och ändrade på sshd_config filen. Hydra får connection refused och inga larm skapas. Nmap portscan gav inte heller några tydliga larm. FIM testet gav larm direkt på flera ställen. I FIM recent events visades tid och vilken fil som ändrades. I min dashboard skapades många ändringar på graferna pga av att flera regle grupper aktiverats för att ändra filen.
+
+
+Del 3: AI-stödd hotdetektion
+
+Steg 11:
+Först expoterade jag larm från Wazhu Indexer. Alltså timestamps, rule id, vilken severity osv osv.
+Vid tiden det här skrivs fanns det 541 händelser att exportera.
+
+Steg 12:
+Skapade ett python script som vars syfte är att hitta avikelser bland larmen. Scriptet gav mig en rapport som ger mig händlser, när dom hände, vilket snitt på severity, unika IP:addresser och ett poängvärde som är baserat på om hur många händelser som var "normala" och "onormala".
+
+
+Steg 13:
+Nästa steg var att skapa ett script som kunde använda datan anomaly_detectorn skapade för att skapa användbara larm.
+
+Steg 14:
+Skapade en log som jag kan skicka larmen till. Sedan körde jag en bit python som skickar larm till den loggfilen.
